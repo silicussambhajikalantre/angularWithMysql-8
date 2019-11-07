@@ -26,14 +26,19 @@ export class DataVisualizationComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    scales: { xAxes: [{}], yAxes: [{   
+      ticks: {
+        min: 0,
+        max: 500,
+    } }] },
   };  
-  public barChartLabels: Label[] = ['2021'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
   public barChartData: ChartDataSets[] = [
-    { data: [80], label: 'Movies' },
-      { data: [40], label: 'Series' }
+    { data: [], label: 'Movies' },
+      { data: [], label: 'Series' }
   ];
   ngOnInit() {
 
@@ -87,16 +92,16 @@ export class DataVisualizationComponent implements OnInit {
           this.seriesArray.push(element.Series);
         }
       }
-      this.barChartLabels = [...this.yearArray, '2021'];
+      this.barChartLabels = [...this.yearArray, ];
       this.barChartData  = [
-        { data: [...this.moviesArray, 80], label: 'Movies' },
-        { data: [...this.seriesArray, 40], label: 'Series' }
+        { data: [...this.moviesArray], label: 'Movies' },
+        { data: [...this.seriesArray], label: 'Series' }
       ];
-    }else {
-      this.barChartLabels = ['2021'];
+    } else {
+      this.barChartLabels = [];
       this.barChartData  = [
-        { data: [80], label: 'Movies' },
-        { data: [40], label: 'Series' }
+        { data: [], label: 'Movies' },
+        { data: [], label: 'Series' }
       ];
     }
     this.barLoading = false;
@@ -115,10 +120,6 @@ export class DataVisualizationComponent implements OnInit {
 
 
 
-  }
-  sendData(year){
-    this.getMovieTotalByYear(year);
-    
   }
   getCheckBoxData(event){
     console.log(event);
