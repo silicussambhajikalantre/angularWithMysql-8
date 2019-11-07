@@ -4,7 +4,8 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8080/angular-with-mysql/angular-php-app/backend',
+  apiUrl: 'http://localhost/angular-with-mysql/angular-php-app/backend',
+  
   
 };
 
