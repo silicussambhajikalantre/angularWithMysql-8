@@ -1,15 +1,5 @@
-<!-- <table>
-<tr *ngFor="let movieDetail of movieDetails">
-  <td>
-    {{ movieDetail.Title }}
-    {{ totalMovieResult }}
-  </td>
-</tr>
-
-</table> -->
-
-
-<table>
+<div class="checkboxOuter">
+    <table>
         <tr>
           <td>
             <input (click)="sendData($event)" type="checkbox" value="2010" />
@@ -33,8 +23,8 @@
             <a>2014</a>
           </td>
           <td>
-              <input  type="checkbox" value="2015" />
-            <a (click)="sendData(2015)">2015</a>
+            <input (click)="sendData($event)"  type="checkbox" value="2015" />
+            <a >2015</a>
           </td>
           <td>
               <input (click)="sendData($event)"  type="checkbox" value="2016" />
@@ -51,5 +41,8 @@
         </tr>
         
       </table>
+
+</div>
+
       
       

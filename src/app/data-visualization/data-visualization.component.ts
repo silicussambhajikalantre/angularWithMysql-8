@@ -18,26 +18,22 @@ export class DataVisualizationComponent implements OnInit {
   moviesArray: number[] = [];
   seriesArray: number[] = [];
   yearArray: string[] = [];
-  public abc: {};
+  barLoading: boolean = false;
   @Output()
   myData: EventEmitter<any> = new EventEmitter<any>();
-  byYear: any;
-  doNotGoToAPI: boolean = true;
+  updateDataArray: any[];
   constructor(private getUsersService: GetUsersService, private getDataFromApi: GetDataFromApiService) { }
-  posts: object;
-  
+
   public barChartOptions: ChartOptions = {
     responsive: true,
-  };
-  
-  public barChartLabels: Label[] = ['2020', '2021'];
+  };  
+  public barChartLabels: Label[] = ['2021'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
-  sm = 20;
   public barChartData: ChartDataSets[] = [
-    { data: [59, 80], label: 'Movies' },
-      { data: [100, 40], label: 'Series' }
+    { data: [80], label: 'Movies' },
+      { data: [40], label: 'Series' }
   ];
   ngOnInit() {
 
@@ -47,7 +43,7 @@ export class DataVisualizationComponent implements OnInit {
     .subscribe(userData => this.users = userData);
   }
   getMovieTotalByYear(event) {
-    this.doNotGoToAPI = true;
+    this.barLoading = true;
     const year = +event.target.value;
     const checkedValue = event.target.checked;
     const ifPresentInArray = this.dataArray.filter(element => (element.Year === year));
@@ -55,34 +51,55 @@ export class DataVisualizationComponent implements OnInit {
       this.getDataFromApi.getMovieDataByYear(year).then((response) => {
         response.json().then((data) => {
             this.byYear2010 = data.totalResults;
-            this.byYear = year;
             this.dataArray.push({ Movies : +this.byYear2010, Series : (500 - this.byYear2010), Year : year, Checkbox: checkedValue});
+        }).then(() => {
+          
+          this.setChart(this.dataArray);
         });
       })
       .catch(err => {
         console.log(err);
       });
-    }
-    if (!checkedValue) {
+    } else {
+      this.updateDataArray = [];
+      if (!checkedValue) {
+        this.updateDataArray = this.dataArray.filter(element => (element.Year == year));        
+      }else {
+        this.updateDataArray = this.dataArray.filter(element => (element.Year == year));
+      }
       this.dataArray = this.dataArray.filter(element => (element.Year !== year));
+      this.dataArray.push({ Movies: this.updateDataArray[0].Movies, Series: this.updateDataArray[0].Series, Year :  this.updateDataArray[0].Year, Checkbox: checkedValue  });
+      this.setChart(this.dataArray);
     }
 
+  }
+
+  setChart(dataArray){
+    this.dataArray =  dataArray;
     if (this.dataArray.length > 0) {
       this.moviesArray = [];
       this.seriesArray = [];
       this.yearArray = [];
       for (const element of this.dataArray) {
-        this.yearArray.push(element.Year);
-        this.moviesArray.push(element.Movies);
-        this.seriesArray.push(element.Series);
+        if(element.Checkbox) {
+          this.yearArray.push(element.Year);
+          this.moviesArray.push(element.Movies);
+          this.seriesArray.push(element.Series);
+        }
       }
-      this.barChartLabels = [...this.yearArray, '2020', '2021'];
+      this.barChartLabels = [...this.yearArray, '2021'];
       this.barChartData  = [
-        { data: [...this.moviesArray, 59, 80], label: 'Movies' },
-        { data: [...this.seriesArray, 100, 40], label: 'Series' }
+        { data: [...this.moviesArray, 80], label: 'Movies' },
+        { data: [...this.seriesArray, 40], label: 'Series' }
+      ];
+    }else {
+      this.barChartLabels = ['2021'];
+      this.barChartData  = [
+        { data: [80], label: 'Movies' },
+        { data: [40], label: 'Series' }
       ];
     }
-
+    this.barLoading = false;
   }
   getMyData() {
     this.getDataFromApi.getData(1).then((response) => {

@@ -1,5 +1,6 @@
-<div style="display: block; width: 600px; margin: 0px auto;">
-        <canvas  baseChart #baseChart="base-chart" 
+<div class="chartSection">
+  <div class="chartOuterBox">
+        <canvas baseChart #baseChart="base-chart" 
           [datasets]="barChartData"
           [labels]="barChartLabels"
           [options]="barChartOptions"
@@ -7,6 +8,11 @@
           [legend]="barChartLegend"
           [chartType]="barChartType">
         </canvas>
-      </div>
+        <div *ngIf="barLoading" class="loader">
+          <h2>Loading...</h2>
+        </div>
+  </div>      
 
-      <app-bar-chart-checkbox (checkBoxCheck)="getCheckBoxData($event)"></app-bar-chart-checkbox>
+<app-bar-chart-checkbox (checkBoxCheck)="getCheckBoxData($event)"></app-bar-chart-checkbox>
+</div>
+      
