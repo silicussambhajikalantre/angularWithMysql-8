@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         this.loggedIn = (user != null);
         if (this.loggedIn){
           this._auth.isLoggedIn(this.loggedIn, user.name, user.email, true);
-          this.router.navigate(['createUser']);
+          this.router.navigate(['dataVizualization']);
         }
       });
    // }

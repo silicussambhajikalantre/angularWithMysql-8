@@ -19,6 +19,7 @@ export class DataVisualizationComponent implements OnInit {
   seriesArray: number[] = [];
   yearArray: string[] = [];
   barLoading: boolean = false;
+  wholeArray = [];
   @Output()
   myData: EventEmitter<any> = new EventEmitter<any>();
   updateDataArray: any[];
@@ -41,7 +42,9 @@ export class DataVisualizationComponent implements OnInit {
       { data: [], label: 'Series' }
   ];
   ngOnInit() {
-
+    for ( let i = 1; i <= 10; i++ ) {
+      this.mayBe(i);
+    }
   }
   getUser(){
     this.getUsersService.getAllUsers()
@@ -78,6 +81,19 @@ export class DataVisualizationComponent implements OnInit {
     }
 
   }
+mayBe(year){
+  this.getDataFromApi.getDataFromTMDB(year).then((response) => {
+    response.json().then((data1) => {
+//        console.log(data1);
+        this.wholeArray += data1;
+    })
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+  
+
 
   setChart(dataArray){
     this.dataArray =  dataArray;
@@ -122,7 +138,7 @@ export class DataVisualizationComponent implements OnInit {
 
   }
   getCheckBoxData(event){
-    console.log(event);
+    //console.logconsole.log(event);
     this.getMovieTotalByYear(event);
   }
 }

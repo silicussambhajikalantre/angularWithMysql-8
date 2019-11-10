@@ -34,7 +34,7 @@ export class CreateUserComponent implements OnInit {
         this.isErrorMsg = data['Success'];
         console.log(data);
         if (data['Success']) {
-         this.getUser();
+          this.router.navigate(['login']);
          }
        });
   }
