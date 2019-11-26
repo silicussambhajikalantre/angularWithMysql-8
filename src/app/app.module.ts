@@ -5,24 +5,22 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'ng4-social-login';
-import { GetUsersService } from './_services/get-users.service';
-import { AuthenticationService } from './_services/authentication.service';
-import { GetDataFromApiService } from './_services/get-data-from-api.service';
-import { AuthGuard } from './_guard/auth.guard';
-
+import { GetUsersService } from './core/services/get-users.service';
+import { AuthenticationService } from './core/services/authentication.service';
+import { GetDataFromApiService } from './core/services/get-data-from-api.service';
+import { AuthGuard } from './core/guards/auth.guard';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { CreateUserComponent } from './create-user/create-user.component';
-import { ViewAllDataComponent } from './view-all-data/view-all-data.component';
+// import { ViewAllDataComponent } from './view-all-data/view-all-data.component';
 import { ChartsModule } from 'ng2-charts';
-import { BarChartComponent } from './view-all-data/bar-chart/bar-chart.component';
-import { DataVisualizationComponent } from './data-visualization/data-visualization.component';
-import { BarChartCheckboxComponent } from './data-visualization/bar-chart-checkbox/bar-chart-checkbox.component';
+// import { BarChartComponent } from './view-all-data/bar-chart/bar-chart.component';
+import { HeaderComponent } from './modules/home/layout/header/header.component';
+import { FooterComponent } from './modules/home/layout/footer/footer.component';
+import { LoginComponent } from './modules/home/pages/user-authentication/login/login.component';
+import { DataVisualizationComponent } from './modules/home/pages/dashboard/data-visualization/data-visualization.component';
+import { BarChartCheckboxComponent } from './modules/home/pages/dashboard/data-visualization/bar-chart-checkbox/bar-chart-checkbox.component';
 const appRoutes: Routes = [
-  { path: 'createUser', component: CreateUserComponent },
-   { path: 'viewAll', component: ViewAllDataComponent, canActivate: [AuthGuard] },
+  // { path: 'createUser', component: CreateUserComponent },
+  //  { path: 'viewAll', component: ViewAllDataComponent, canActivate: [AuthGuard] },
    { path: 'dataVizualization', component: DataVisualizationComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -44,9 +42,9 @@ export function provideConfig() {
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    CreateUserComponent,
-    ViewAllDataComponent,
-    BarChartComponent,
+    // CreateUserComponent,
+    // ViewAllDataComponent,
+    // BarChartComponent,
     DataVisualizationComponent,
     BarChartCheckboxComponent
   ],

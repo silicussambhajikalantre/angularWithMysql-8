@@ -1,0 +1,42 @@
+
+<div class="container-fluid login-body text-center">
+  <div class="login-wrapper d-flex align-items-center justify-content-between">
+    <div class="login-container pl-5">
+      <div class="logo-wrapper">
+        <img src="../../../../../../assets/images/logo.png"/>
+        <p>Manage your data more wisely with DM.</p>
+     </div>
+      <div class="login-form text-left">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div *ngIf="!isErrorMsg" class="alert alert-danger">
+          {{ errorMsg }}
+          </div>
+          <div class="form-group">
+            <input type="email" id="exampleInputEmail1" class="form-control" formControlName="emailId" required>
+            <label class="form-control-placeholder" for="exampleInputEmail1">Email</label>
+          </div>
+          <div class="form-group">
+              <input type="password" id="exampleInputPassword1" class="form-control" required>
+              <label class="form-control-placeholder" for="exampleInputPassword1" formControlName="password">Password</label>
+            </div>
+            <!-- <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" formControlName="emailId">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div> -->
+            <!-- <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" formControlName="password">
+            </div> -->
+
+            <button type="submit" class="btn btn-primary pull-right">Submit</button>
+            <div class="orDiv">------ OR ------</div>
+          </form>
+          <button class="signInWithGoogle btn btn-primary pull-right" (click)="signInWithGoogle()"><img src="../../assets/images/signInWithGoogle.png" /> <span>Continue with Google</span></button>
+      </div>
+    </div>
+    <div class="login-aside-bar">
+        <img src="../../../../../../assets/images/login-aside.png"/>
+    </div>
+  </div>
+</div>

@@ -25,11 +25,13 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/sass/styles.scss",
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",     
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/sass/styles.scss",
             ],
             "scripts": []
           },
